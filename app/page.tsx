@@ -15,12 +15,9 @@ export default function HomePage() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Hero Section */}
         <div className="text-center mb-12">
-          <div className="flex items-center justify-center gap-3 mb-6">
-            <Car className="h-8 w-8 text-blue-600" />
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900">
-              Fuel Cost Calculator
-            </h1>
-          </div>
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
+            Fuel Cost Calculator
+          </h1>
           <p className="text-lg text-gray-600 max-w-3xl mx-auto">
             Plan your next road trip across New Zealand with confidence. 
             Get instant fuel cost estimates between major cities like Auckland, 
@@ -46,8 +43,8 @@ export default function HomePage() {
             </p>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {routes.slice(0, 6).map((route, index) => (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            {routes.slice(0, 12).map((route, index) => (
               <div key={index} className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow duration-200">
                 <div className="flex items-center gap-2 mb-3">
                   <MapPin className="h-5 w-5 text-blue-600" />

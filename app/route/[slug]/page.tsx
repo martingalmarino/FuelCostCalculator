@@ -218,11 +218,49 @@ export default function RoutePage({ params }: RoutePageProps) {
               Related Routes
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {routes
-                .filter(r => r.from === from || r.to === from || r.from === to || r.to === to)
-                .filter(r => !(r.from === from && r.to === to) && !(r.from === to && r.to === from))
-                .slice(0, 6)
-                .map((route, index) => (
+              {(() => {
+                // Obtener rutas que comparten ciudades con la ruta actual
+                const relatedRoutes = routes.filter(r => 
+                  (r.from === from || r.to === from || r.from === to || r.to === to) &&
+                  !(r.from === from && r.to === to) && 
+                  !(r.from === to && r.to === from)
+                );
+                
+                // Si hay menos de 6 rutas relacionadas, agregar rutas populares
+                if (relatedRoutes.length < 6) {
+                  const popularRoutes = routes
+                    .filter(r => r.from === 'Auckland' || r.to === 'Auckland' || r.from === 'Wellington' || r.to === 'Wellington')
+                    .filter(r => !relatedRoutes.some(rel => rel.from === r.from && rel.to === r.to))
+                    .slice(0, 6 - relatedRoutes.length);
+                  
+                  return [...relatedRoutes, ...popularRoutes]
+                    .slice(0, 6)
+                    .map((route, index) => (
+                      <div key={index} className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow duration-200">
+                        <div className="flex items-center gap-2 mb-3">
+                          <MapPin className="h-5 w-5 text-blue-600" />
+                          <h3 className="font-semibold text-lg text-gray-900">
+                            {route.from} → {route.to}
+                          </h3>
+                        </div>
+                        <div className="bg-blue-50 rounded-lg p-3 mb-4 border border-blue-100">
+                          <div className="text-center">
+                            <span className="text-sm font-medium text-blue-700">Distance: </span>
+                            <span className="text-lg font-bold text-blue-800">{route.km} km</span>
+                          </div>
+                        </div>
+                        <a
+                          href={`/route/${route.from.toLowerCase().replace(/\s+/g, '-')}-to-${route.to.toLowerCase().replace(/\s+/g, '-')}`}
+                          className="block w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-md transition-colors duration-200 text-center"
+                        >
+                          View Details
+                        </a>
+                      </div>
+                    ));
+                }
+                
+                // Si hay 6 o más rutas relacionadas, usar solo esas
+                return relatedRoutes.slice(0, 6).map((route, index) => (
                   <div key={index} className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow duration-200">
                     <div className="flex items-center gap-2 mb-3">
                       <MapPin className="h-5 w-5 text-blue-600" />
@@ -243,7 +281,8 @@ export default function RoutePage({ params }: RoutePageProps) {
                       View Details
                     </a>
                   </div>
-                ))}
+                ));
+              })()}
             </div>
           </section>
         </div>
