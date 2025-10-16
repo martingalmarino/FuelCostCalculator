@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import { Car } from 'lucide-react';
 import './globals.css';
+import CookiehubScript from './components/CookiehubScript';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -63,18 +64,6 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        {/* Cookiehub */}
-        <script src="https://cdn.cookiehub.eu/c2/f66471de.js"></script>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              document.addEventListener("DOMContentLoaded", function(event) {
-                var cpm = {};
-                window.cookiehub.load(cpm);
-              });
-            `,
-          }}
-        />
         {/* Google Analytics placeholder */}
         {/* <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script> */}
         <script
@@ -89,6 +78,7 @@ export default function RootLayout({
         />
       </head>
       <body className={inter.className}>
+        <CookiehubScript />
         <div className="min-h-screen bg-gray-50">
           <header className="bg-white shadow-sm">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
