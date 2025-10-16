@@ -31,39 +31,6 @@ export default function FuelForm({ routes, initialFrom, initialTo }: FuelFormPro
   // Obtener todas las ciudades únicas
   const cities = routeCalculator().getAllCities();
 
-  // Función para calcular el resultado
-  const handleCalculate = () => {
-    if (!from || !to) {
-      setError('Please select origin and destination cities');
-      return;
-    }
-
-    if (from === to) {
-      setError('Origin and destination cities must be different');
-      return;
-    }
-
-    const calculator = routeCalculator();
-    const distance = calculator.findDistance(from, to);
-    
-    if (!distance) {
-      setError(`No route found between ${from} and ${to}. Please try different cities or check our popular routes below.`);
-      return;
-    }
-
-    setError('');
-    
-    const totalCost = calculateFuelCost(distance, consumption, price);
-    const liters = (distance * consumption) / 100;
-
-    setResult({
-      distance,
-      consumption,
-      price,
-      liters,
-      totalCost
-    });
-  };
 
   // Calcular automáticamente cuando cambien los valores
   useEffect(() => {
@@ -83,10 +50,12 @@ export default function FuelForm({ routes, initialFrom, initialTo }: FuelFormPro
         });
         setError('');
       } else {
-        // Solo mostrar error si el usuario ha intentado calcular
-        // No mostrar error automáticamente
         setResult(null);
+        setError(`No route found between ${from} and ${to}. Please try different cities or check our popular routes below.`);
       }
+    } else if (from && to && from === to) {
+      setResult(null);
+      setError('Origin and destination cities must be different');
     } else {
       setResult(null);
       setError('');
@@ -174,12 +143,6 @@ export default function FuelForm({ routes, initialFrom, initialTo }: FuelFormPro
           </div>
         )}
         
-        <button
-          onClick={handleCalculate}
-          className="btn-primary w-full md:w-auto"
-        >
-          Calculate Cost
-        </button>
       </div>
 
       {result && (
