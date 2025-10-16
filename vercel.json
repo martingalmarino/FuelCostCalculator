@@ -2,6 +2,14 @@
   "buildCommand": "npm run build",
   "outputDirectory": "out",
   "framework": "nextjs",
+  "functions": {
+    "app/sitemap.xml/route.ts": {
+      "runtime": "nodejs18.x"
+    },
+    "app/robots.txt/route.ts": {
+      "runtime": "nodejs18.x"
+    }
+  },
   "rewrites": [
     {
       "source": "/sitemap.xml",
@@ -27,8 +35,19 @@
         {
           "key": "X-XSS-Protection",
           "value": "1; mode=block"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "origin-when-cross-origin"
         }
       ]
+    }
+  ],
+  "redirects": [
+    {
+      "source": "/home",
+      "destination": "/",
+      "permanent": true
     }
   ]
 }
