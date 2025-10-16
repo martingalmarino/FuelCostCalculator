@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
+import { Car } from 'lucide-react';
 import './globals.css';
 
 const inter = Inter({ subsets: ['latin'] });
@@ -71,27 +72,24 @@ export default function RootLayout({
         />
       </head>
       <body className={inter.className}>
-        <div className="min-h-screen">
-          <header className="bg-white/80 backdrop-blur-sm shadow-sm sticky top-0 z-50 border-b border-gray-100">
-            <div className="container-mobile">
-              <div className="flex justify-between items-center py-4 sm:py-6">
+        <div className="min-h-screen bg-gray-50">
+          <header className="bg-white shadow-sm">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+              <div className="flex justify-between items-center py-4">
                 <div className="flex items-center gap-2">
-                  <span className="text-2xl sm:text-3xl">🚗</span>
-                  <h1 className="text-xl sm:text-2xl font-bold gradient-text">
+                  <Car className="h-6 w-6 text-blue-600" />
+                  <h1 className="text-xl font-bold text-gray-900">
                     FuelCostCalculator.nz
                   </h1>
                 </div>
-                <nav className="hidden md:flex space-x-6 lg:space-x-8">
-                  <a href="/" className="text-gray-600 hover:text-blue-600 transition-colors font-medium">
+                <nav className="hidden md:flex space-x-8">
+                  <a href="/" className="text-gray-600 hover:text-blue-600 transition-colors">
                     Home
                   </a>
-                  <a href="#calculator" className="text-gray-600 hover:text-blue-600 transition-colors font-medium">
+                  <a href="#calculator" className="text-gray-600 hover:text-blue-600 transition-colors">
                     Calculator
                   </a>
                 </nav>
-                <button className="md:hidden p-2 text-gray-600 hover:text-blue-600">
-                  <span className="text-xl">☰</span>
-                </button>
               </div>
             </div>
           </header>
@@ -100,17 +98,11 @@ export default function RootLayout({
             {children}
           </main>
           
-          <footer className="bg-white/80 backdrop-blur-sm border-t border-gray-100 mt-16">
-            <div className="container-mobile py-8 sm:py-12">
-              <div className="text-center">
-                <div className="flex items-center justify-center gap-2 mb-4">
-                  <span className="text-2xl">🇳🇿</span>
-                  <h3 className="text-lg font-semibold text-gray-800">FuelCostCalculator.nz</h3>
-                </div>
-                <p className="text-gray-600 text-responsive mb-4">
-                  &copy; 2024 FuelCostCalculator.nz - New Zealand Fuel Cost Calculator
-                </p>
-                <p className="text-sm text-gray-500">
+          <footer className="bg-white border-t mt-16">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+              <div className="text-center text-gray-600">
+                <p>&copy; 2024 FuelCostCalculator.nz - New Zealand Fuel Cost Calculator</p>
+                <p className="text-sm mt-2">
                   Plan your New Zealand road trip with our free fuel cost calculator.
                 </p>
               </div>

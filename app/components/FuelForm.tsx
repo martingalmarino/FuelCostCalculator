@@ -4,6 +4,7 @@ import { useState, useEffect, useCallback } from 'react';
 import { calculateFuelCost, DEFAULT_VALUES } from '@/lib/calculateFuelCost';
 import { Route, CalculationResult } from '@/lib/types';
 import { RouteCalculator } from '@/lib/routeCalculator';
+import { MapPin, Target, Fuel, DollarSign } from 'lucide-react';
 import ResultCard from './ResultCard';
 
 interface FuelFormProps {
@@ -63,25 +64,26 @@ export default function FuelForm({ routes, initialFrom, initialTo }: FuelFormPro
   }, [from, to, consumption, price, routeCalculator]);
 
   return (
-    <div className="space-responsive">
-      <div className="card">
+    <div className="space-y-6">
+      <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
         <div className="text-center mb-6">
-          <h2 className="heading-responsive gradient-text mb-2">Fuel Cost Calculator</h2>
-          <p className="text-responsive text-gray-600">Calculate your fuel costs between New Zealand cities</p>
+          <h2 className="text-2xl font-bold text-gray-900 mb-2">Fuel Cost Calculator</h2>
+          <p className="text-gray-600">Calculate your fuel costs between New Zealand cities</p>
         </div>
         
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 mb-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
           <div className="space-y-2">
-            <label htmlFor="from" className="label-text">
+            <label htmlFor="from" className="block text-sm font-medium text-gray-700">
               <span className="flex items-center gap-2">
-                🚗 From City
+                <MapPin className="h-4 w-4 text-blue-600" />
+                From City
               </span>
             </label>
             <select
               id="from"
               value={from}
               onChange={(e) => setFrom(e.target.value)}
-              className="select-field"
+              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             >
               <option value="">Select origin city...</option>
               {cities.map(city => (
@@ -91,16 +93,17 @@ export default function FuelForm({ routes, initialFrom, initialTo }: FuelFormPro
           </div>
           
           <div className="space-y-2">
-            <label htmlFor="to" className="label-text">
+            <label htmlFor="to" className="block text-sm font-medium text-gray-700">
               <span className="flex items-center gap-2">
-                🎯 To City
+                <Target className="h-4 w-4 text-blue-600" />
+                To City
               </span>
             </label>
             <select
               id="to"
               value={to}
               onChange={(e) => setTo(e.target.value)}
-              className="select-field"
+              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             >
               <option value="">Select destination city...</option>
               {cities.map(city => (
@@ -110,11 +113,12 @@ export default function FuelForm({ routes, initialFrom, initialTo }: FuelFormPro
           </div>
         </div>
         
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 mb-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
           <div className="space-y-2">
-            <label htmlFor="consumption" className="label-text">
+            <label htmlFor="consumption" className="block text-sm font-medium text-gray-700">
               <span className="flex items-center gap-2">
-                ⛽ Fuel Consumption (L/100 km)
+                <Fuel className="h-4 w-4 text-blue-600" />
+                Fuel Consumption (L/100 km)
               </span>
             </label>
             <input
@@ -126,14 +130,15 @@ export default function FuelForm({ routes, initialFrom, initialTo }: FuelFormPro
               max="20"
               step="0.1"
               placeholder="7.0"
-              className="input-field"
+              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             />
           </div>
           
           <div className="space-y-2">
-            <label htmlFor="price" className="label-text">
+            <label htmlFor="price" className="block text-sm font-medium text-gray-700">
               <span className="flex items-center gap-2">
-                💰 Fuel Price (NZD/L)
+                <DollarSign className="h-4 w-4 text-blue-600" />
+                Fuel Price (NZD/L)
               </span>
             </label>
             <input
@@ -145,16 +150,15 @@ export default function FuelForm({ routes, initialFrom, initialTo }: FuelFormPro
               max="10"
               step="0.01"
               placeholder="2.90"
-              className="input-field"
+              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             />
           </div>
         </div>
         
         {error && (
-          <div className="error-message mb-4">
+          <div className="bg-red-50 border border-red-200 rounded-md p-4 mb-4">
             <div className="flex items-center gap-2">
-              <span className="text-lg">⚠️</span>
-              <p>{error}</p>
+              <p className="text-red-700 text-sm">{error}</p>
             </div>
           </div>
         )}
