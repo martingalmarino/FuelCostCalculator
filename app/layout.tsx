@@ -108,7 +108,7 @@ export default function RootLayout({
           <footer className="bg-white border-t mt-16">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
               <div className="text-center text-gray-600">
-                <p>&copy; 2024 FuelCostCalculator.nz - New Zealand Fuel Cost Calculator</p>
+                <p>&copy; 2025 FuelCostCalculator.nz - New Zealand Fuel Cost Calculator</p>
                 <p className="text-sm mt-2">
                   Plan your New Zealand road trip with our free fuel cost calculator.
                 </p>
