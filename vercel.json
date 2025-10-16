@@ -1,25 +1,4 @@
 {
-  "buildCommand": "npm run build",
-  "outputDirectory": "out",
-  "framework": "nextjs",
-  "functions": {
-    "app/sitemap.xml/route.ts": {
-      "runtime": "nodejs18.x"
-    },
-    "app/robots.txt/route.ts": {
-      "runtime": "nodejs18.x"
-    }
-  },
-  "rewrites": [
-    {
-      "source": "/sitemap.xml",
-      "destination": "/sitemap.xml"
-    },
-    {
-      "source": "/robots.txt", 
-      "destination": "/robots.txt"
-    }
-  ],
   "headers": [
     {
       "source": "/(.*)",
