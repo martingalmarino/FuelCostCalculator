@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { calculateFuelCost, DEFAULT_VALUES } from '@/lib/calculateFuelCost';
 import { Route, CalculationResult } from '@/lib/types';
+import { RouteCalculator } from '@/lib/routeCalculator';
 import ResultCard from './ResultCard';
 
 interface FuelFormProps {
@@ -22,31 +23,13 @@ export default function FuelForm({ routes, initialFrom, initialTo }: FuelFormPro
   const [result, setResult] = useState<CalculationResult | null>(null);
   const [error, setError] = useState('');
 
-  // Obtener todas las ciudades únicas
-  const cities = Array.from(
-    new Set([
-      ...routes.map(r => r.from),
-      ...routes.map(r => r.to)
-    ])
-  ).sort();
-
-  // Función para encontrar la distancia entre dos ciudades
-  const findDistance = useCallback((fromCity: string, toCity: string): number | null => {
-    // Buscar ruta directa
-    let route = routes.find(r => r.from === fromCity && r.to === toCity);
-    
-    // Si no se encuentra, buscar ruta inversa
-    if (!route) {
-      route = routes.find(r => r.from === toCity && r.to === fromCity);
-    }
-    
-    return route ? route.km : null;
+  // Crear instancia del calculador de rutas
+  const routeCalculator = useCallback(() => {
+    return new RouteCalculator(routes);
   }, [routes]);
 
-  // Función para verificar si existe una ruta entre dos ciudades
-  const routeExists = useCallback((fromCity: string, toCity: string): boolean => {
-    return findDistance(fromCity, toCity) !== null;
-  }, [findDistance]);
+  // Obtener todas las ciudades únicas
+  const cities = routeCalculator().getAllCities();
 
   // Función para calcular el resultado
   const handleCalculate = () => {
@@ -60,10 +43,11 @@ export default function FuelForm({ routes, initialFrom, initialTo }: FuelFormPro
       return;
     }
 
-    const distance = findDistance(from, to);
+    const calculator = routeCalculator();
+    const distance = calculator.findDistance(from, to);
     
     if (!distance) {
-      setError(`No direct route found between ${from} and ${to}. Please try different cities or check our popular routes below.`);
+      setError(`No route found between ${from} and ${to}. Please try different cities or check our popular routes below.`);
       return;
     }
 
@@ -84,7 +68,8 @@ export default function FuelForm({ routes, initialFrom, initialTo }: FuelFormPro
   // Calcular automáticamente cuando cambien los valores
   useEffect(() => {
     if (from && to && from !== to) {
-      const distance = findDistance(from, to);
+      const calculator = routeCalculator();
+      const distance = calculator.findDistance(from, to);
       if (distance) {
         const totalCost = calculateFuelCost(distance, consumption, price);
         const liters = (distance * consumption) / 100;
@@ -106,7 +91,7 @@ export default function FuelForm({ routes, initialFrom, initialTo }: FuelFormPro
       setResult(null);
       setError('');
     }
-  }, [from, to, consumption, price, findDistance]);
+  }, [from, to, consumption, price, routeCalculator]);
 
   return (
     <div className="space-y-6">
