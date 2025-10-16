@@ -63,39 +63,46 @@ export default function FuelForm({ routes, initialFrom, initialTo }: FuelFormPro
   }, [from, to, consumption, price, routeCalculator]);
 
   return (
-    <div className="space-y-6">
+    <div className="space-responsive">
       <div className="card">
-        <h2 className="text-xl font-semibold mb-4">Fuel Cost Calculator</h2>
+        <div className="text-center mb-6">
+          <h2 className="heading-responsive gradient-text mb-2">Fuel Cost Calculator</h2>
+          <p className="text-responsive text-gray-600">Calculate your fuel costs between New Zealand cities</p>
+        </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-          <div>
-            <label htmlFor="from" className="block text-sm font-medium text-gray-700 mb-2">
-              From City
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 mb-6">
+          <div className="space-y-2">
+            <label htmlFor="from" className="label-text">
+              <span className="flex items-center gap-2">
+                🚗 From City
+              </span>
             </label>
             <select
               id="from"
               value={from}
               onChange={(e) => setFrom(e.target.value)}
-              className="input-field"
+              className="select-field"
             >
-              <option value="">Select city...</option>
+              <option value="">Select origin city...</option>
               {cities.map(city => (
                 <option key={city} value={city}>{city}</option>
               ))}
             </select>
           </div>
           
-          <div>
-            <label htmlFor="to" className="block text-sm font-medium text-gray-700 mb-2">
-              To City
+          <div className="space-y-2">
+            <label htmlFor="to" className="label-text">
+              <span className="flex items-center gap-2">
+                🎯 To City
+              </span>
             </label>
             <select
               id="to"
               value={to}
               onChange={(e) => setTo(e.target.value)}
-              className="input-field"
+              className="select-field"
             >
-              <option value="">Select city...</option>
+              <option value="">Select destination city...</option>
               {cities.map(city => (
                 <option key={city} value={city}>{city}</option>
               ))}
@@ -103,10 +110,12 @@ export default function FuelForm({ routes, initialFrom, initialTo }: FuelFormPro
           </div>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-          <div>
-            <label htmlFor="consumption" className="block text-sm font-medium text-gray-700 mb-2">
-              Fuel Consumption (L/100 km)
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 mb-6">
+          <div className="space-y-2">
+            <label htmlFor="consumption" className="label-text">
+              <span className="flex items-center gap-2">
+                ⛽ Fuel Consumption (L/100 km)
+              </span>
             </label>
             <input
               type="number"
@@ -116,13 +125,16 @@ export default function FuelForm({ routes, initialFrom, initialTo }: FuelFormPro
               min="1"
               max="20"
               step="0.1"
+              placeholder="7.0"
               className="input-field"
             />
           </div>
           
-          <div>
-            <label htmlFor="price" className="block text-sm font-medium text-gray-700 mb-2">
-              Fuel Price (NZD/L)
+          <div className="space-y-2">
+            <label htmlFor="price" className="label-text">
+              <span className="flex items-center gap-2">
+                💰 Fuel Price (NZD/L)
+              </span>
             </label>
             <input
               type="number"
@@ -132,14 +144,18 @@ export default function FuelForm({ routes, initialFrom, initialTo }: FuelFormPro
               min="0.1"
               max="10"
               step="0.01"
+              placeholder="2.90"
               className="input-field"
             />
           </div>
         </div>
         
         {error && (
-          <div className="bg-red-50 border border-red-200 rounded-lg p-3 mb-4">
-            <p className="text-red-700 text-sm">{error}</p>
+          <div className="error-message mb-4">
+            <div className="flex items-center gap-2">
+              <span className="text-lg">⚠️</span>
+              <p>{error}</p>
+            </div>
           </div>
         )}
         
