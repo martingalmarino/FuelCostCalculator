@@ -1,7 +1,7 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://fuelcostcalculator.nz/sitemap.xml
+Sitemap: https://www.fuelcostnz.com/sitemap.xml
 
 # Allow all crawlers
 User-agent: Googlebot

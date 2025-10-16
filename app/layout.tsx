@@ -17,14 +17,19 @@ export const metadata: Metadata = {
     address: false,
     telephone: false,
   },
-  metadataBase: new URL('https://fuelcostcalculator.nz'),
+  metadataBase: new URL('https://www.fuelcostnz.com'),
   alternates: {
     canonical: '/',
+  },
+  icons: {
+    icon: '/favicon.svg',
+    shortcut: '/favicon.svg',
+    apple: '/favicon.svg',
   },
   openGraph: {
     title: 'Fuel Cost Calculator NZ | New Zealand Road Trip Planner',
     description: 'Calculate fuel costs for traveling between New Zealand cities. Free estimator to plan your road trip across NZ.',
-    url: 'https://fuelcostcalculator.nz',
+    url: 'https://www.fuelcostnz.com',
     siteName: 'Fuel Cost Calculator NZ',
     locale: 'en_NZ',
     type: 'website',
@@ -46,7 +51,7 @@ export const metadata: Metadata = {
     },
   },
   verification: {
-    google: 'your-google-verification-code',
+    google: 'RLnS09vnVD5h4ryZX9pbG_3ZqLl9ozcJPZwk0lUSLdk',
   },
 };
 
@@ -58,6 +63,18 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+        {/* Cookiehub */}
+        <script src="https://cdn.cookiehub.eu/c2/f66471de.js"></script>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              document.addEventListener("DOMContentLoaded", function(event) {
+                var cpm = {};
+                window.cookiehub.load(cpm);
+              });
+            `,
+          }}
+        />
         {/* Google Analytics placeholder */}
         {/* <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script> */}
         <script

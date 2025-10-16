@@ -43,7 +43,7 @@ export async function generateMetadata({ params }: RoutePageProps): Promise<Meta
       openGraph: {
         title: `Fuel Cost from ${from} to ${to} | NZ Trip Calculator`,
         description: `Calculate how much fuel you'll need to travel from ${from} to ${to} in New Zealand. Distance: ${distance} km.`,
-        url: `https://fuelcostcalculator.nz/route/${params.slug}`,
+        url: `https://www.fuelcostnz.com/route/${params.slug}`,
         type: 'website',
       },
       twitter: {
