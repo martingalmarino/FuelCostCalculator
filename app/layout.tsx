@@ -64,6 +64,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+        <CookiehubScript />
         {/* Google Analytics placeholder */}
         {/* <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script> */}
         <script
@@ -78,7 +79,6 @@ export default function RootLayout({
         />
       </head>
       <body className={inter.className}>
-        <CookiehubScript />
         <div className="min-h-screen bg-gray-50">
           <header className="bg-white shadow-sm">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

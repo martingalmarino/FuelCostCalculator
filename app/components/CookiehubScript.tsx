@@ -7,11 +7,11 @@ export default function CookiehubScript() {
     <>
       <Script
         src="https://cdn.cookiehub.eu/c2/f66471de.js"
-        strategy="afterInteractive"
+        strategy="beforeInteractive"
       />
       <Script
         id="cookiehub-init"
-        strategy="afterInteractive"
+        strategy="beforeInteractive"
         dangerouslySetInnerHTML={{
           __html: `
             document.addEventListener("DOMContentLoaded", function(event) {
