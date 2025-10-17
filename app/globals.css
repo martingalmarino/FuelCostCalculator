@@ -13,3 +13,88 @@
     @apply bg-gray-50 text-gray-900;
   }
 }
+
+@layer components {
+  /* Hero Section Styles */
+  .hero-section {
+    @apply relative overflow-hidden;
+    background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+    background-image: 
+      repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(59, 130, 246, 0.03) 2px,
+        rgba(59, 130, 246, 0.03) 4px
+      );
+  }
+
+  .hero-badge {
+    @apply inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium;
+    background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+    color: #1e40af;
+    border: 1px solid rgba(59, 130, 246, 0.2);
+  }
+
+  .hero-title {
+    @apply text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight;
+    color: #1f2937;
+  }
+
+  .hero-title-accent {
+    @apply text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight;
+    background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero-description {
+    @apply text-lg sm:text-xl text-gray-600 leading-relaxed max-w-3xl mx-auto;
+  }
+
+  /* Page Body Styles */
+  .page-body {
+    @apply bg-white;
+    background: linear-gradient(135deg, #ffffff 0%, #f9fafb 100%);
+  }
+
+  .content-section {
+    @apply bg-white rounded-2xl shadow-sm border border-gray-100 p-6 sm:p-8;
+    background: linear-gradient(135deg, #ffffff 0%, #fafafa 100%);
+  }
+
+  /* Card Styles */
+  .feature-card {
+    @apply bg-white rounded-xl shadow-sm border border-gray-200 p-6 hover:shadow-md transition-all duration-300;
+    background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+  }
+
+  .feature-card:hover {
+    @apply shadow-lg border-blue-200;
+    transform: translateY(-2px);
+  }
+
+  /* Button Styles */
+  .btn-primary {
+    @apply inline-flex items-center gap-2 px-6 py-3 rounded-lg font-medium transition-all duration-200;
+    background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+    color: white;
+    box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.2);
+  }
+
+  .btn-primary:hover {
+    @apply shadow-lg;
+    background: linear-gradient(135deg, #1d4ed8 0%, #1e40af 100%);
+    transform: translateY(-1px);
+  }
+
+  /* Section Spacing */
+  .section-spacing {
+    @apply py-16 sm:py-20 lg:py-24;
+  }
+
+  .container-spacing {
+    @apply px-4 sm:px-6 lg:px-8;
+  }
+}
