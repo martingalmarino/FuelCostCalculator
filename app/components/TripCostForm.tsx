@@ -35,10 +35,21 @@ export default function TripCostForm({ routes }: TripCostFormProps) {
     console.log('Available routes:', routes.length);
     console.log('Sample routes:', routes.slice(0, 3));
 
-    const selectedRoute = routes.find(route => 
-      (route.from === from && route.to === to) || 
-      (route.from === to && route.to === from)
-    );
+    // Normalize city names for comparison (trim whitespace, handle case)
+    const normalizeCity = (city: string) => city.trim();
+    
+    const selectedRoute = routes.find(route => {
+      const routeFrom = normalizeCity(route.from);
+      const routeTo = normalizeCity(route.to);
+      const searchFrom = normalizeCity(from);
+      const searchTo = normalizeCity(to);
+      
+      console.log(`Comparing: "${routeFrom}" === "${searchFrom}" && "${routeTo}" === "${searchTo}"`);
+      console.log(`Or: "${routeFrom}" === "${searchTo}" && "${routeTo}" === "${searchFrom}"`);
+      
+      return (routeFrom === searchFrom && routeTo === searchTo) || 
+             (routeFrom === searchTo && routeTo === searchFrom);
+    });
 
     if (!selectedRoute) {
       console.log('Route not found. Available routes:', routes.map(r => `${r.from} → ${r.to}`));
