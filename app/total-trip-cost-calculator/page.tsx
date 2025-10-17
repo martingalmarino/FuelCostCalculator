@@ -7,10 +7,6 @@ import { Calculator, MapPin, DollarSign, HelpCircle, Star } from 'lucide-react';
 // Convertir el JSON a tipo ExtendedRoute
 const routes: ExtendedRoute[] = routesExtendedData;
 
-// Debug: Log the loaded routes
-console.log('Loaded routes for trip calculator:', routes.length);
-console.log('Sample route:', routes[0]);
-
 export const metadata: Metadata = {
   title: 'Total Trip Cost Calculator NZ | Fuel + Tolls + Ferry',
   description: 'Estimate total travel costs across New Zealand including fuel, tolls, and ferry charges. Compare routes like Auckland–Wellington and Christchurch–Queenstown instantly.',

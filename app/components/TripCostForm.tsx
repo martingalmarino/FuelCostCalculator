@@ -30,11 +30,6 @@ export default function TripCostForm({ routes }: TripCostFormProps) {
       return;
     }
 
-    // Debug: Log the search parameters and available routes
-    console.log('Searching for route:', { from, to });
-    console.log('Available routes:', routes.length);
-    console.log('Sample routes:', routes.slice(0, 3));
-
     // Normalize city names for comparison (trim whitespace, handle case)
     const normalizeCity = (city: string) => city.trim();
     
@@ -43,9 +38,6 @@ export default function TripCostForm({ routes }: TripCostFormProps) {
       const routeTo = normalizeCity(route.to);
       const searchFrom = normalizeCity(from);
       const searchTo = normalizeCity(to);
-      
-      console.log(`Comparing: "${routeFrom}" === "${searchFrom}" && "${routeTo}" === "${searchTo}"`);
-      console.log(`Or: "${routeFrom}" === "${searchTo}" && "${routeTo}" === "${searchFrom}"`);
       
       return (routeFrom === searchFrom && routeTo === searchTo) || 
              (routeFrom === searchTo && routeTo === searchFrom);
