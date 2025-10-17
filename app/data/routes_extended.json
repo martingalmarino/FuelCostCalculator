@@ -1,0 +1,22 @@
+[
+  { "from": "Auckland", "to": "Hamilton", "km": 125, "tolls": 2.5, "ferry": 0, "region": "North Island" },
+  { "from": "Auckland", "to": "Rotorua", "km": 230, "tolls": 2.5, "ferry": 0, "region": "North Island" },
+  { "from": "Auckland", "to": "Tauranga", "km": 210, "tolls": 4.2, "ferry": 0, "region": "North Island" },
+  { "from": "Auckland", "to": "Taupo", "km": 275, "tolls": 2.5, "ferry": 0, "region": "North Island" },
+  { "from": "Auckland", "to": "Wellington", "km": 640, "tolls": 2.5, "ferry": 0, "region": "North Island" },
+  { "from": "Wellington", "to": "Christchurch", "km": 440, "tolls": 0, "ferry": 180, "region": "Interisland" },
+  { "from": "Christchurch", "to": "Queenstown", "km": 480, "tolls": 0, "ferry": 0, "region": "South Island" },
+  { "from": "Dunedin", "to": "Invercargill", "km": 210, "tolls": 0, "ferry": 0, "region": "South Island" },
+  { "from": "Nelson", "to": "Picton", "km": 135, "tolls": 0, "ferry": 0, "region": "South Island" },
+  { "from": "Wellington", "to": "Picton", "km": 110, "tolls": 0, "ferry": 180, "region": "Interisland" },
+  { "from": "Wellington", "to": "Napier", "km": 320, "tolls": 0, "ferry": 0, "region": "North Island" },
+  { "from": "Christchurch", "to": "Greymouth", "km": 240, "tolls": 0, "ferry": 0, "region": "South Island" },
+  { "from": "Queenstown", "to": "Te Anau", "km": 170, "tolls": 0, "ferry": 0, "region": "South Island" },
+  { "from": "Rotorua", "to": "Taupo", "km": 80, "tolls": 0, "ferry": 0, "region": "North Island" },
+  { "from": "Taupo", "to": "Napier", "km": 145, "tolls": 0, "ferry": 0, "region": "North Island" },
+  { "from": "Auckland", "to": "Napier", "km": 410, "tolls": 2.5, "ferry": 0, "region": "North Island" },
+  { "from": "Christchurch", "to": "Nelson", "km": 420, "tolls": 0, "ferry": 0, "region": "South Island" },
+  { "from": "Greymouth", "to": "Franz Josef", "km": 170, "tolls": 0, "ferry": 0, "region": "South Island" },
+  { "from": "Franz Josef", "to": "Queenstown", "km": 350, "tolls": 0, "ferry": 0, "region": "South Island" },
+  { "from": "Dunedin", "to": "Queenstown", "km": 280, "tolls": 0, "ferry": 0, "region": "South Island" }
+]

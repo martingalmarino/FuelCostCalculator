@@ -94,7 +94,10 @@ export default function RootLayout({
                     Home
                   </a>
                   <a href="#calculator" className="text-gray-600 hover:text-blue-600 transition-colors">
-                    Calculator
+                    Fuel Calculator
+                  </a>
+                  <a href="/total-trip-cost-calculator" className="text-gray-600 hover:text-blue-600 transition-colors">
+                    Total Trip Cost
                   </a>
                 </nav>
               </div>
