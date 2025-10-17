@@ -30,15 +30,23 @@ export default function TripCostForm({ routes }: TripCostFormProps) {
       return;
     }
 
+    // Debug: Log the search parameters and available routes
+    console.log('Searching for route:', { from, to });
+    console.log('Available routes:', routes.length);
+    console.log('Sample routes:', routes.slice(0, 3));
+
     const selectedRoute = routes.find(route => 
       (route.from === from && route.to === to) || 
       (route.from === to && route.to === from)
     );
 
     if (!selectedRoute) {
-      alert('Route not found in our database');
+      console.log('Route not found. Available routes:', routes.map(r => `${r.from} → ${r.to}`));
+      alert(`Route not found in our database. Please try a different combination. Available routes: ${routes.slice(0, 5).map(r => `${r.from} → ${r.to}`).join(', ')}...`);
       return;
     }
+
+    console.log('Found route:', selectedRoute);
 
     const calculationResult = calculateTripCost(
       selectedRoute.km,
