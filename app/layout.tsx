@@ -86,7 +86,7 @@ export default function RootLayout({
                 <div className="flex items-center gap-2">
                   <Car className="h-6 w-6 text-blue-600" />
                   <h1 className="text-xl font-bold text-gray-900">
-                    FuelCostCalculator.nz
+                  Fuelcostnz.com
                   </h1>
                 </div>
                 <nav className="hidden md:flex space-x-8">
