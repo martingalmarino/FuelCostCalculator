@@ -37,9 +37,7 @@ export default function HomePage() {
 
           {/* Calculator Section */}
           <section id="calculator" className="mb-16">
-            <div className="content-section">
-              <FuelForm routes={routes} />
-            </div>
+            <FuelForm routes={routes} />
           </section>
 
           {/* Popular Routes Section */}
