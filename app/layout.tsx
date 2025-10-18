@@ -83,6 +83,13 @@ export default function RootLayout({
             `,
           }}
         />
+        {/* Google AdSense */}
+        <script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6771833588582297"
+          crossOrigin="anonymous"
+        />
+        
         {/* CookieHub Script - Carga directa en head como respaldo */}
         <script
           src="https://cookiehub.net/c2/f66471de.js"
