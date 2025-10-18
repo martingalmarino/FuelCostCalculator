@@ -265,6 +265,10 @@
     @apply px-6 py-3 border border-gray-300 text-gray-700 rounded-xl hover:bg-gray-50 transition-all duration-200 font-medium;
   }
 
+  .btn-new-route {
+    @apply px-6 py-3 bg-green-600 hover:bg-green-700 text-white rounded-xl transition-all duration-200 font-medium shadow-sm hover:shadow-md;
+  }
+
   /* Error States */
   .error-message {
     @apply bg-red-50 border border-red-200 rounded-xl p-4;

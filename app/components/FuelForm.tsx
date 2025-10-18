@@ -177,7 +177,7 @@ export default function FuelForm({ routes, initialFrom, initialTo }: FuelFormPro
                 setResult(null);
                 setError('');
               }}
-              className="btn-reset w-full"
+              className="btn-new-route w-full"
             >
               Calculate New Route
             </button>

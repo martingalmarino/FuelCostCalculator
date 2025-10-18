@@ -220,7 +220,7 @@ export default function TripCostForm({ routes }: TripCostFormProps) {
           <div className="mt-4 pt-4 border-t border-blue-200">
             <button
               onClick={handleReset}
-              className="btn-reset w-full"
+              className="btn-new-route w-full"
             >
               Calculate New Trip
             </button>
