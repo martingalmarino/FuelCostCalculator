@@ -3,6 +3,13 @@ import { Inter } from 'next/font/google';
 import { Car } from 'lucide-react';
 import './globals.css';
 import CookiehubScript from './components/CookiehubScript';
+import CookiehubDebug from './components/CookiehubDebug';
+import CookiehubForceInit from './components/CookiehubForceInit';
+import CookiehubConfig from './components/CookiehubConfig';
+import CookiehubNetworkTest from './components/CookiehubNetworkTest';
+import CookiehubScriptLoader from './components/CookiehubScriptLoader';
+import CookiehubAlternative from './components/CookiehubAlternative';
+import CustomCookieBanner from './components/CustomCookieBanner';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -76,9 +83,63 @@ export default function RootLayout({
             `,
           }}
         />
+        {/* CookieHub Script - Carga directa en head como respaldo */}
+        <script
+          src="https://cookiehub.net/c2/f66471de.js"
+          async
+        />
+        {/* Script de respaldo adicional */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              // Verificar carga del script principal y cargar respaldo si falla
+              setTimeout(() => {
+                if (!window.CookieHub) {
+                  console.log('🔄 Loading CookieHub fallback script...');
+                  
+                  // Intentar múltiples URLs de respaldo
+                  const fallbackUrls = [
+                    'https://cdn.cookiehub.eu/c2/f66471de.js',
+                    'https://cookiehub.com/c2/f66471de.js'
+                  ];
+                  
+                  let currentIndex = 0;
+                  
+                  const tryLoadFallback = () => {
+                    if (currentIndex >= fallbackUrls.length) {
+                      console.error('❌ All CookieHub fallback URLs failed');
+                      return;
+                    }
+                    
+                    const script = document.createElement('script');
+                    script.src = fallbackUrls[currentIndex];
+                    script.async = true;
+                    script.onload = () => {
+                      console.log('✅ CookieHub fallback loaded from:', fallbackUrls[currentIndex]);
+                    };
+                    script.onerror = () => {
+                      console.log('❌ Failed to load from:', fallbackUrls[currentIndex]);
+                      currentIndex++;
+                      tryLoadFallback();
+                    };
+                    document.head.appendChild(script);
+                  };
+                  
+                  tryLoadFallback();
+                }
+              }, 3000);
+            `
+          }}
+        />
       </head>
       <body className={inter.className}>
+        <CookiehubConfig />
+        <CookiehubNetworkTest />
+        <CookiehubScriptLoader />
         <CookiehubScript />
+        <CookiehubAlternative />
+        <CookiehubDebug />
+        <CookiehubForceInit />
         <div className="min-h-screen bg-gray-50">
           <header className="bg-white shadow-sm">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -119,6 +180,9 @@ export default function RootLayout({
             </div>
           </footer>
         </div>
+        
+        {/* Banner de cookies personalizado como respaldo */}
+        <CustomCookieBanner />
       </body>
     </html>
   );
