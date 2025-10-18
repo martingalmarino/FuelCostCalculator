@@ -95,49 +95,6 @@ export default function RootLayout({
           src="https://cookiehub.net/c2/f66471de.js"
           async
         />
-        {/* Script de respaldo adicional */}
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              // Verificar carga del script principal y cargar respaldo si falla
-              setTimeout(() => {
-                if (!window.CookieHub) {
-                  console.log('🔄 Loading CookieHub fallback script...');
-                  
-                  // Intentar múltiples URLs de respaldo
-                  const fallbackUrls = [
-                    'https://cdn.cookiehub.eu/c2/f66471de.js',
-                    'https://cookiehub.com/c2/f66471de.js'
-                  ];
-                  
-                  let currentIndex = 0;
-                  
-                  const tryLoadFallback = () => {
-                    if (currentIndex >= fallbackUrls.length) {
-                      console.error('❌ All CookieHub fallback URLs failed');
-                      return;
-                    }
-                    
-                    const script = document.createElement('script');
-                    script.src = fallbackUrls[currentIndex];
-                    script.async = true;
-                    script.onload = () => {
-                      console.log('✅ CookieHub fallback loaded from:', fallbackUrls[currentIndex]);
-                    };
-                    script.onerror = () => {
-                      console.log('❌ Failed to load from:', fallbackUrls[currentIndex]);
-                      currentIndex++;
-                      tryLoadFallback();
-                    };
-                    document.head.appendChild(script);
-                  };
-                  
-                  tryLoadFallback();
-                }
-              }, 3000);
-            `
-          }}
-        />
       </head>
       <body className={inter.className}>
         <CookiehubConfig />
