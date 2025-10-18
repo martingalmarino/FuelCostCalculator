@@ -4,8 +4,10 @@ import { useState, useEffect, useCallback } from 'react';
 import { calculateFuelCost, DEFAULT_VALUES } from '@/lib/calculateFuelCost';
 import { Route, CalculationResult } from '@/lib/types';
 import { RouteCalculator } from '@/lib/routeCalculator';
-import { MapPin, Target, Fuel, DollarSign } from 'lucide-react';
-import ResultCard from './ResultCard';
+import { MapPin, Target, Fuel, DollarSign, Calculator } from 'lucide-react';
+import CalculatorCard from './ui/CalculatorCard';
+import FormField from './ui/FormField';
+import ResultDisplay from './ui/ResultDisplay';
 
 interface FuelFormProps {
   routes: Route[];
@@ -65,62 +67,43 @@ export default function FuelForm({ routes, initialFrom, initialTo }: FuelFormPro
 
   return (
     <div className="space-y-6">
-      <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-        <div className="text-center mb-6">
-          <h2 className="text-2xl font-bold text-gray-900 mb-2">Fuel Cost Calculator</h2>
-          <p className="text-gray-600">Calculate your fuel costs between New Zealand cities</p>
-        </div>
-        
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-          <div className="space-y-2">
-            <label htmlFor="from" className="block text-sm font-medium text-gray-700">
-              <span className="flex items-center gap-2">
-                <MapPin className="h-4 w-4 text-blue-600" />
-                From City
-              </span>
-            </label>
+      <CalculatorCard
+        title="Fuel Cost Calculator"
+        description="Calculate your fuel costs between New Zealand cities"
+        icon={Calculator}
+      >
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <FormField label="From City" icon={MapPin}>
             <select
               id="from"
               value={from}
               onChange={(e) => setFrom(e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="form-select"
             >
               <option value="">Select origin city...</option>
               {cities.map(city => (
                 <option key={city} value={city}>{city}</option>
               ))}
             </select>
-          </div>
+          </FormField>
           
-          <div className="space-y-2">
-            <label htmlFor="to" className="block text-sm font-medium text-gray-700">
-              <span className="flex items-center gap-2">
-                <Target className="h-4 w-4 text-blue-600" />
-                To City
-              </span>
-            </label>
+          <FormField label="To City" icon={Target}>
             <select
               id="to"
               value={to}
               onChange={(e) => setTo(e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="form-select"
             >
               <option value="">Select destination city...</option>
               {cities.map(city => (
                 <option key={city} value={city}>{city}</option>
               ))}
             </select>
-          </div>
+          </FormField>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-          <div className="space-y-2">
-            <label htmlFor="consumption" className="block text-sm font-medium text-gray-700">
-              <span className="flex items-center gap-2">
-                <Fuel className="h-4 w-4 text-blue-600" />
-                Fuel Consumption (L/100 km)
-              </span>
-            </label>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <FormField label="Fuel Consumption (L/100 km)" icon={Fuel}>
             <input
               type="number"
               id="consumption"
@@ -130,17 +113,11 @@ export default function FuelForm({ routes, initialFrom, initialTo }: FuelFormPro
               max="20"
               step="0.1"
               placeholder="7.0"
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="form-input"
             />
-          </div>
+          </FormField>
           
-          <div className="space-y-2">
-            <label htmlFor="price" className="block text-sm font-medium text-gray-700">
-              <span className="flex items-center gap-2">
-                <DollarSign className="h-4 w-4 text-blue-600" />
-                Fuel Price (NZD/L)
-              </span>
-            </label>
+          <FormField label="Fuel Price (NZD/L)" icon={DollarSign}>
             <input
               type="number"
               id="price"
@@ -150,33 +127,62 @@ export default function FuelForm({ routes, initialFrom, initialTo }: FuelFormPro
               max="10"
               step="0.01"
               placeholder="2.90"
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="form-input"
             />
-          </div>
+          </FormField>
         </div>
         
         {error && (
-          <div className="bg-red-50 border border-red-200 rounded-md p-4 mb-4">
-            <div className="flex items-center gap-2">
-              <p className="text-red-700 text-sm">{error}</p>
-            </div>
+          <div className="error-message">
+            <p className="error-text">{error}</p>
           </div>
         )}
-        
-      </div>
+      </CalculatorCard>
 
       {result && (
-        <ResultCard
-          result={result}
-          from={from}
-          to={to}
-          onRecalculate={() => {
-            setFrom('');
-            setTo('');
-            setResult(null);
-            setError('');
-          }}
-        />
+        <ResultDisplay
+          title="Fuel Cost Breakdown"
+          icon={DollarSign}
+        >
+          <div className="result-row">
+            <span className="result-label">Route:</span>
+            <span className="result-value">{from} → {to}</span>
+          </div>
+          <div className="result-row">
+            <span className="result-label">Distance:</span>
+            <span className="result-value">{result.distance} km</span>
+          </div>
+          <div className="result-row">
+            <span className="result-label">Fuel needed:</span>
+            <span className="result-value">{result.liters.toFixed(2)} liters</span>
+          </div>
+          <div className="result-row">
+            <span className="result-label">Consumption:</span>
+            <span className="result-value">{result.consumption} L/100 km</span>
+          </div>
+          <div className="result-row">
+            <span className="result-label">Price per liter:</span>
+            <span className="result-value">NZD ${result.price}</span>
+          </div>
+          <div className="result-total">
+            <span className="result-total-label">Total fuel cost:</span>
+            <span className="result-total-value">NZD ${result.totalCost.toFixed(2)}</span>
+          </div>
+          
+          <div className="mt-4 pt-4 border-t border-blue-200">
+            <button
+              onClick={() => {
+                setFrom('');
+                setTo('');
+                setResult(null);
+                setError('');
+              }}
+              className="btn-reset w-full"
+            >
+              Calculate New Route
+            </button>
+          </div>
+        </ResultDisplay>
       )}
     </div>
   );

@@ -97,4 +97,180 @@
   .container-spacing {
     @apply px-4 sm:px-6 lg:px-8;
   }
+
+  /* Calculator Components */
+  .calculator-card {
+    @apply bg-white rounded-2xl shadow-sm border border-gray-100 p-6 sm:p-8;
+    background: linear-gradient(135deg, #ffffff 0%, #fafafa 100%);
+  }
+
+  .calculator-header {
+    @apply flex items-center gap-4 mb-6;
+  }
+
+  .calculator-icon {
+    @apply w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center;
+    color: #3b82f6;
+  }
+
+  .calculator-title-section {
+    @apply flex-1;
+  }
+
+  .calculator-title {
+    @apply text-xl font-bold text-gray-900 mb-1;
+  }
+
+  .calculator-description {
+    @apply text-sm text-gray-600;
+  }
+
+  .calculator-content {
+    @apply space-y-6;
+  }
+
+  /* Form Components */
+  .form-field {
+    @apply space-y-2;
+  }
+
+  .form-label {
+    @apply block text-sm font-medium text-gray-700;
+  }
+
+  .form-label-content {
+    @apply flex items-center gap-2;
+  }
+
+  .form-label-icon {
+    @apply h-4 w-4 text-blue-600;
+  }
+
+  .form-input-wrapper {
+    @apply relative;
+  }
+
+  .form-input {
+    @apply w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200;
+    background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+  }
+
+  .form-input:focus {
+    @apply shadow-md;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+  }
+
+  .form-select {
+    @apply form-input appearance-none cursor-pointer;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
+    background-position: right 0.75rem center;
+    background-repeat: no-repeat;
+    background-size: 1.5em 1.5em;
+    padding-right: 2.5rem;
+  }
+
+  /* Toggle Switch */
+  .toggle-switch {
+    @apply flex items-center justify-between p-4 bg-gray-50 rounded-xl border border-gray-200;
+  }
+
+  .toggle-label {
+    @apply flex items-center gap-3;
+  }
+
+  .toggle-icon {
+    @apply h-5 w-5 text-gray-600;
+  }
+
+  .toggle-text {
+    @apply text-sm font-medium text-gray-700;
+  }
+
+  .toggle-wrapper {
+    @apply relative inline-flex items-center cursor-pointer;
+  }
+
+  .toggle-input {
+    @apply sr-only;
+  }
+
+  .toggle-slider {
+    @apply w-11 h-6 bg-gray-200 rounded-full peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 transition-all duration-200;
+  }
+
+  .toggle-input:checked + .toggle-slider {
+    @apply bg-blue-600;
+  }
+
+  .toggle-input:checked + .toggle-slider::before {
+    @apply translate-x-full;
+  }
+
+  .toggle-slider::before {
+    @apply content-[''] absolute top-[2px] left-[2px] bg-white border border-gray-300 rounded-full h-5 w-5 transition-all duration-200;
+  }
+
+  /* Result Display */
+  .result-display {
+    @apply bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl border border-blue-100 p-6;
+  }
+
+  .result-header {
+    @apply flex items-center gap-3 mb-4;
+  }
+
+  .result-icon {
+    @apply w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center;
+    color: #3b82f6;
+  }
+
+  .result-title {
+    @apply text-lg font-semibold text-blue-900;
+  }
+
+  .result-content {
+    @apply space-y-3;
+  }
+
+  .result-row {
+    @apply flex justify-between items-center py-2;
+  }
+
+  .result-label {
+    @apply text-sm font-medium text-blue-700;
+  }
+
+  .result-value {
+    @apply text-sm font-semibold text-blue-900;
+  }
+
+  .result-total {
+    @apply flex justify-between items-center pt-3 border-t border-blue-200;
+  }
+
+  .result-total-label {
+    @apply text-base font-semibold text-blue-800;
+  }
+
+  .result-total-value {
+    @apply text-xl font-bold text-blue-900;
+  }
+
+  /* Action Buttons */
+  .btn-calculate {
+    @apply btn-primary w-full justify-center py-4 text-base font-semibold;
+  }
+
+  .btn-reset {
+    @apply px-6 py-3 border border-gray-300 text-gray-700 rounded-xl hover:bg-gray-50 transition-all duration-200 font-medium;
+  }
+
+  /* Error States */
+  .error-message {
+    @apply bg-red-50 border border-red-200 rounded-xl p-4;
+  }
+
+  .error-text {
+    @apply text-red-700 text-sm font-medium;
+  }
 }
