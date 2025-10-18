@@ -9,7 +9,9 @@ export default function CookiehubDebug() {
   const getClassNameString = (element: Element): string => {
     if (!element.className) return '';
     if (typeof element.className === 'string') return element.className;
-    if (typeof element.className === 'object') return element.className.toString();
+    if (typeof element.className === 'object' && element.className !== null) {
+      return (element.className as any).toString();
+    }
     return '';
   };
 
@@ -50,7 +52,7 @@ export default function CookiehubDebug() {
     if (banner) {
       logs.push('✅ Banner de CookieHub encontrado en DOM');
       logs.push(`   - Elemento: ${banner.tagName}`);
-      logs.push(`   - Visible: ${banner.offsetHeight > 0 ? 'Sí' : 'No'}`);
+      logs.push(`   - Visible: ${(banner as HTMLElement).offsetHeight > 0 ? 'Sí' : 'No'}`);
       logs.push(`   - Estilo display: ${getComputedStyle(banner).display}`);
     } else {
       logs.push('❌ Banner de CookieHub NO encontrado en DOM');
@@ -79,8 +81,8 @@ export default function CookiehubDebug() {
       );
       
       if (cookiehubEntries.length > 0) {
-        const entry = cookiehubEntries[0];
-        if (entry.transferSize > 0) {
+        const entry = cookiehubEntries[0] as PerformanceResourceTiming;
+        if (entry.transferSize && entry.transferSize > 0) {
           logs.push(`✅ Script de CookieHub cargado correctamente (${entry.transferSize} bytes)`);
         } else {
           logs.push('❌ Script de CookieHub falló al cargar (0 bytes)');
@@ -171,7 +173,7 @@ export default function CookiehubDebug() {
     const scripts = document.querySelectorAll('script[src*="cookiehub"]');
     console.log(`Scripts de CookieHub encontrados: ${scripts.length}`);
     scripts.forEach((script, i) => {
-      console.log(`Script ${i + 1}:`, script.src);
+      console.log(`Script ${i + 1}:`, (script as HTMLScriptElement).src);
     });
     
     // Verificar si el dominio está configurado correctamente

@@ -8,7 +8,9 @@ export default function CookiehubForceInit() {
     const getClassNameString = (element: Element): string => {
       if (!element.className) return '';
       if (typeof element.className === 'string') return element.className;
-      if (typeof element.className === 'object') return element.className.toString();
+      if (typeof element.className === 'object' && element.className !== null) {
+        return (element.className as any).toString();
+      }
       return '';
     };
 
@@ -58,7 +60,7 @@ export default function CookiehubForceInit() {
         getClassNameString(el).toLowerCase().includes('cookie')
       );
       
-      const allBanners = [...possibleBanners, ...classNameBanners];
+      const allBanners = Array.from(possibleBanners).concat(classNameBanners);
       
       allBanners.forEach((banner, index) => {
         console.log(`Banner ${index + 1}:`, banner);
